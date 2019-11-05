@@ -2,7 +2,7 @@
   "name": "path-finder-visualizer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jbtleloup.github.io/Path-Finding-Visualizer-React",
+  "homepage": "https://jbtleloup.github.io/Path-Finding-Visualizer",
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
