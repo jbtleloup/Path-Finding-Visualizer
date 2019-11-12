@@ -10,11 +10,9 @@ export function AStar(grid, startNode, finishNode) {
         node.isVisited = false;
         return node
     });
-    let i = 0;
     while (!!unvisitedNodes.length) {
         sortNodesByDistance(unvisitedNodes);
         const closestNode = unvisitedNodes.shift();
-        console.log(closestNode);
         // If we encounter a wall, we skip it.
         if (closestNode.isWall) continue;
         // If the closest node is at a distance of infinity,
@@ -24,7 +22,6 @@ export function AStar(grid, startNode, finishNode) {
         visitedNodesInOrder.push(closestNode);
         if (closestNode === finishNode) return visitedNodesInOrder;
         updateUnvisitedNeighbors(closestNode, grid, finishNode);
-        i++;
     }
 }
 
@@ -51,7 +48,6 @@ function relax(source, destination, isWeight, finishNode) {
     const h = manhattanDistance(destination, finishNode);
     const f = g + h;
     if (destination.distance > f) {
-        console.log(f);
         destination.currentDistance = source.currentDistance + weight;
         destination.distance = f;
         destination.previousNode = source;
