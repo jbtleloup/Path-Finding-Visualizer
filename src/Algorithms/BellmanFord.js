@@ -28,6 +28,7 @@ function getEdges(vertices, grid) {
             unpackedEdges.push(edge);
         }
     }
+    // format [source, destination]
     return unpackedEdges;
 }
 

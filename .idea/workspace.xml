@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="35f9b42d-a6e9-40e9-9da7-1eb117abe5bc" name="Default Changelist" comment="Recursive Bactracking Maze implementation">
-      <change afterPath="$PROJECT_DIR$/src/Algorithms/RecursiveBacktracking.js" afterDir="false" />
+    <list default="true" id="35f9b42d-a6e9-40e9-9da7-1eb117abe5bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Algorithms/A*.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/Dijkstra.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Dijkstra.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PathFindingVisualizer/Node/Node.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/PathFindingVisualizer/Node/Node.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/BellmanFord.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BellmanFord.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PathFindingVisualizer/PathFindingVisualizer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/PathFindingVisualizer/PathFindingVisualizer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -113,7 +112,7 @@
       <workItem from="1570904992433" duration="73929000" />
       <workItem from="1573165202153" duration="271000" />
       <workItem from="1573227094692" duration="2462000" />
-      <workItem from="1573532899098" duration="8644000" />
+      <workItem from="1573532899098" duration="14491000" />
     </task>
     <task id="LOCAL-00001" summary="Add Truck and Font Awesome Icons + fixed Dijkstra weight issue + grid full size and responsive + fixed the animation for Dijkstra">
       <created>1572846973715</created>
@@ -122,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572846973716</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Recursive Bactracking Maze implementation">
+      <created>1573542876752</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573542876752</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

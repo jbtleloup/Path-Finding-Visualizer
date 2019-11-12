@@ -5,6 +5,7 @@ import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/Dijkstra';
 import './PathfindingVisualizer.css';
 import {bellmanFord, getNodesInShortestPathOrderBF} from "../Algorithms/BellmanFord";
 import {recursiveBactracking} from "../Algorithms/RecursiveBacktracking";
+import {AStar} from "../Algorithms/A*";
 
 const START_NODE_ROW = 15;
 const START_NODE_COL = 15;
@@ -232,6 +233,15 @@ export default class PathfindingVisualizer extends Component {
         this.animateBellmanFord(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
+    visualizeAStar() {
+        const {grid, previousStart, previousEnd} = this.state;
+        const startNode = grid[previousStart.row][previousStart.col];
+        const finishNode = grid[previousEnd.row][previousEnd.col];
+        const visitedNodesInOrder = AStar(grid, startNode, finishNode);
+        const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+        this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
+
     generateMaze() {
         // Put Start on top left and End bottom right of the grid
         // The maze does not take in consideration start and finish
@@ -263,6 +273,9 @@ export default class PathfindingVisualizer extends Component {
                 </button>
                 <button onClick={() => this.visualizeBellmanFord()}>
                     Visualize Bellman Ford's Algorithm
+                </button>
+                <button onClick={() => this.visualizeAStar()}>
+                    Visualize A* Algorithm
                 </button>
                 <button onClick={() => this.generateMaze()}>
                     Generate Maze
@@ -297,6 +310,7 @@ export default class PathfindingVisualizer extends Component {
             </>
         );
     }
+
 }
 const getInitialGrid = () => {
     // WARNING: the number of rows and columns should also be modified in Node.css
@@ -398,6 +412,4 @@ const resetNodesVisited = (grid) => {
     }
     return newGrid;
 };
-
-
 
