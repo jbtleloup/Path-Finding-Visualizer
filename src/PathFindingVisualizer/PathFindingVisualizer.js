@@ -4,11 +4,15 @@ import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/Dijkstra';
 
 import './PathfindingVisualizer.css';
 import {bellmanFord, getNodesInShortestPathOrderBF} from "../Algorithms/BellmanFord";
+import {recursiveBactracking} from "../Algorithms/RecursiveBacktracking";
 
-const START_NODE_ROW = 10;
+const START_NODE_ROW = 15;
 const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
+const FINISH_NODE_ROW = 15;
+const FINISH_NODE_COL = 45;
+
+const NUMBER_OF_ROWS = 31;
+const NUMBER_OF_COL = 61;
 
 export default class PathfindingVisualizer extends Component {
     constructor(props) {
@@ -228,6 +232,28 @@ export default class PathfindingVisualizer extends Component {
         this.animateBellmanFord(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
+    generateMaze() {
+        // Put Start on top left and End bottom right of the grid
+        // The maze does not take in consideration start and finish
+        // We manually need to put this two nodes in odd row and col
+        //Todo: Factorise
+        const {grid, previousStart, previousEnd} = this.state;
+        const newStartGrid = getNewGridWithStartNodeUpdated(grid, previousStart, 0, 0);
+        const newStartAndEndGrid = getNewGridWithEndNodeUpdated(newStartGrid, previousEnd, NUMBER_OF_ROWS - 1, NUMBER_OF_COL - 1);
+        this.setState({grid: newStartAndEndGrid, previousStart:{row:0, col:0}, previousEnd:{row: NUMBER_OF_ROWS - 1, col: NUMBER_OF_COL - 1}});
+        const startNode = grid[0][0];
+        const finishNode = grid[NUMBER_OF_ROWS - 1][NUMBER_OF_COL - 1];
+        const wallNodes = recursiveBactracking(grid, startNode, finishNode);
+        // TODO: Actualise the state once, create utility function
+        for (let i = 0; i < wallNodes.length; i++) {
+            const {grid} = this.state;
+            const {row, col} = wallNodes[i];
+            const mazeGrid = getNewGridWithWallToggled(grid, row, col);
+            this.setState({grid: mazeGrid});
+        }
+
+    }
+
     render() {
         const {grid, mouseIsPressed, wKeyIsPressed} = this.state;
         return (
@@ -237,6 +263,9 @@ export default class PathfindingVisualizer extends Component {
                 </button>
                 <button onClick={() => this.visualizeBellmanFord()}>
                     Visualize Bellman Ford's Algorithm
+                </button>
+                <button onClick={() => this.generateMaze()}>
+                    Generate Maze
                 </button>
                 <span className={!wKeyIsPressed ? 'hidden' : ''}>Weight</span>
                 <div className="grid">
@@ -272,11 +301,10 @@ export default class PathfindingVisualizer extends Component {
 const getInitialGrid = () => {
     // WARNING: the number of rows and columns should also be modified in Node.css
     // AND in resetNodesVisited
-    //Todo: Put row and col as Constant
     const grid = [];
-    for (let row = 0; row < 30; row++) {
+    for (let row = 0; row < NUMBER_OF_ROWS; row++) {
         const currentRow = [];
-        for (let col = 0; col < 60; col++) {
+        for (let col = 0; col < NUMBER_OF_COL; col++) {
             currentRow.push(createNode(col, row));
         }
         grid.push(currentRow);
@@ -352,9 +380,9 @@ const getNewGridWithEndNodeUpdated = (grid, pEnd, row, col) => {
 // todo: Should not create a new grid should only modify the current grid
 const resetNodesVisited = (grid) => {
     let newGrid = [];
-    for (let row = 0; row < 30; row++) {
+    for (let row = 0; row < NUMBER_OF_ROWS; row++) {
         const currentRow = [];
-        for (let col = 0; col < 60; col++) {
+        for (let col = 0; col < NUMBER_OF_COL; col++) {
             let node = {
                 ...grid[row][col],
                 isVisited: false,

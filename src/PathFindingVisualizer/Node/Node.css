@@ -2,8 +2,8 @@
     /*60 is the number of columns and 30 the number of rows
     please modify accordingly in PathFindingVisualizer.js
     120px is the size of the header*/
-    width: calc(100% / 60);
-    height: calc((100vh - 120px) / 30);
+    width: calc(100% / 61);
+    height: calc((100vh - 120px) / 31);
     outline: 1px solid rgb(175, 216, 248);
     display: inline-block;
     vertical-align: top;
