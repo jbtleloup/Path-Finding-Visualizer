@@ -298,6 +298,7 @@ export default class PathfindingVisualizer extends Component {
                     <button onClick={() => this.generateMaze()}>
                         Generate Maze
                     </button>
+                    <span className={wKeyIsPressed ? 'hidden' : ''}>Press W and click on the grid to add weight</span>
                     <span className={!wKeyIsPressed ? 'hidden' : ''}>Weight</span>
                 </div>
                 <div className="grid">
