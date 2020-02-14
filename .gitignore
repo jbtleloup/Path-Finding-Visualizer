@@ -17,6 +17,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.idea/inspectionProfiles/Project_Default.xml
+.idea/workspace.xml
+
 
 npm-debug.log*
 yarn-debug.log*
