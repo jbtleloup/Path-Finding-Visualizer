@@ -1,7 +1,40 @@
 .grid {
-    margin: 100px 0;
+
+}
+
+.warm-red:hover {
+    background-color: orangered;
 }
 
 .hidden {
     display: none;
+}
+
+button {
+
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid deepskyblue;
+    margin: 0.3em 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    font-size: 1em;
+}
+
+button:hover {
+    color: #ffffff;
+    background-color: deepskyblue;
+}
+
+@media all and (max-width: 30em) {
+     button1 {
+        display: block;
+        margin: 0.4em auto;
+    }
 }

@@ -22,7 +22,7 @@ class App extends Component {
         let uniqueId = this.state.gridId;
         return (
             <div className="App">
-                <button onClick={() => this.resetGrid()}>
+                <button className={"warm-red"} onClick={() => this.resetGrid()}>
                     Reset Grid
                 </button>
                 <PathFindingVisualiser key={uniqueId}/>

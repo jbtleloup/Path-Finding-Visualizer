@@ -22,7 +22,7 @@ export function dijkstra(grid, startNode, finishNode) {
     }
 }
 
-function sortNodesByDistance(unvisitedNodes) {
+export function sortNodesByDistance(unvisitedNodes) {
     unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 }
 
@@ -43,7 +43,7 @@ function relax(source, destination, isWeight) {
     }
 }
 
-function getUnvisitedNeighbors(node, grid) {
+export function getUnvisitedNeighbors(node, grid) {
     const neighbors = [];
     const {col, row} = node;
     if (row > 0) neighbors.push(grid[row - 1][col]);
@@ -53,7 +53,7 @@ function getUnvisitedNeighbors(node, grid) {
     return neighbors.filter(neighbor => !neighbor.isVisited);
 }
 
-function getAllNodes(grid) {
+export function getAllNodes(grid) {
     const nodes = [];
     for (const row of grid) {
         for (const node of row) {

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
-import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/Dijkstra';
-
 import './PathfindingVisualizer.css';
+
+import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/Dijkstra';
 import {bellmanFord, getNodesInShortestPathOrderBF} from "../Algorithms/BellmanFord";
 import {recursiveBactracking} from "../Algorithms/RecursiveBacktracking";
 import {AStar} from "../Algorithms/A*";
+import {bestFirstSearch} from "../Algorithms/BestFirstSearch";
 
 const START_NODE_ROW = 15;
 const START_NODE_COL = 15;
@@ -242,6 +243,15 @@ export default class PathfindingVisualizer extends Component {
         this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
+    visualizeBestFirstSearch() {
+        const {grid, previousStart, previousEnd} = this.state;
+        const startNode = grid[previousStart.row][previousStart.col];
+        const finishNode = grid[previousEnd.row][previousEnd.col];
+        const visitedNodesInOrder = bestFirstSearch(grid, startNode, finishNode);
+        const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+        this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
+
     generateMaze() {
         // Put Start on top left and End bottom right of the grid
         // The maze does not take in consideration start and finish
@@ -250,7 +260,11 @@ export default class PathfindingVisualizer extends Component {
         const {grid, previousStart, previousEnd} = this.state;
         const newStartGrid = getNewGridWithStartNodeUpdated(grid, previousStart, 0, 0);
         const newStartAndEndGrid = getNewGridWithEndNodeUpdated(newStartGrid, previousEnd, NUMBER_OF_ROWS - 1, NUMBER_OF_COL - 1);
-        this.setState({grid: newStartAndEndGrid, previousStart:{row:0, col:0}, previousEnd:{row: NUMBER_OF_ROWS - 1, col: NUMBER_OF_COL - 1}});
+        this.setState({
+            grid: newStartAndEndGrid,
+            previousStart: {row: 0, col: 0},
+            previousEnd: {row: NUMBER_OF_ROWS - 1, col: NUMBER_OF_COL - 1}
+        });
         const startNode = grid[0][0];
         const finishNode = grid[NUMBER_OF_ROWS - 1][NUMBER_OF_COL - 1];
         const wallNodes = recursiveBactracking(grid, startNode, finishNode);
@@ -268,19 +282,24 @@ export default class PathfindingVisualizer extends Component {
         const {grid, mouseIsPressed, wKeyIsPressed} = this.state;
         return (
             <>
-                <button onClick={() => this.visualizeDijkstra()}>
-                    Visualize Dijkstra's Algorithm
-                </button>
-                <button onClick={() => this.visualizeBellmanFord()}>
-                    Visualize Bellman Ford's Algorithm
-                </button>
-                <button onClick={() => this.visualizeAStar()}>
-                    Visualize A* Algorithm
-                </button>
-                <button onClick={() => this.generateMaze()}>
-                    Generate Maze
-                </button>
-                <span className={!wKeyIsPressed ? 'hidden' : ''}>Weight</span>
+                <div>
+                    <button onClick={() => this.visualizeDijkstra()}>
+                        Visualize Dijkstra's Algorithm
+                    </button>
+                    <button onClick={() => this.visualizeBellmanFord()}>
+                        Visualize Bellman Ford's Algorithm
+                    </button>
+                    <button onClick={() => this.visualizeAStar()}>
+                        Visualize A* Algorithm
+                    </button>
+                    <button onClick={() => this.visualizeBestFirstSearch()}>
+                        Visualize Best First Search
+                    </button>
+                    <button onClick={() => this.generateMaze()}>
+                        Generate Maze
+                    </button>
+                    <span className={!wKeyIsPressed ? 'hidden' : ''}>Weight</span>
+                </div>
                 <div className="grid">
                     {grid.map((row, rowIdx) => {
                         return (
